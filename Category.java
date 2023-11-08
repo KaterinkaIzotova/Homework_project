@@ -1,11 +1,17 @@
 import java.util.ArrayList;
-public class Category {
-    protected String name;
-    protected ArrayList <Product> products;
+import java.util.List;
 
-    public Category(String name, ArrayList<Product> products) {
+public class Category {
+    private String name;
+    private List<Product> products;
+
+    public Category(String name) {
         this.name = name;
         this.products = new ArrayList<>();
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
     public String getName() {
@@ -16,35 +22,21 @@ public class Category {
         this.name = name;
     }
 
-    public ArrayList<Product> getProducts() {
-        return products;
+    public List<Product> getProducts() {
+        return this.products;
     }
 
     public void setProducts(ArrayList<Product> products) {
         this.products = products;
     }
 
-
-    public static void seeCatalog(ArrayList<Product> myProdyct) {
-        Category categoryFace = new Category("Для Лица", null );
-        for (int i = 0; i < myProdyct.size(); i++) {
-            categoryFace.products.add(myProdyct.get(i));
+    public Product findProductByName(String productName) {
+        for (Product product : products) {
+            if (product.getName().equalsIgnoreCase(productName)) {
+                return product;
+            }
         }
-
-        Category categoryBody = new Category("Для Тела", null);
-        for (int i = 0; i < myProdyct.size(); i++) {
-            categoryFace.products.add(myProdyct.get(i));
-        }
-
-        Category categoryHair = new Category("Для Волос", null);
-        for (int i = 0; i < myProdyct.size(); i++) {
-            categoryFace.products.add(myProdyct.get(i));
-        }
-
-        System.out.println("Каталог товаров: " + "\n" + categoryFace.getName() + "\n"
-                + categoryBody.getName() + "\n" + categoryHair.getName()
-        );
-
+        return null;
     }
 }
 
